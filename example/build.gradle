@@ -1,0 +1,29 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    }
+    dependencies {
+        classpath 'io.github.rockerhieu:versionberg:1.0.0-SNAPSHOT'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'io.github.rockerhieu.versionberg'
+
+versionberg {
+    major 1
+    minor 0
+    patch 10
+}
+
+version = versionberg.name
+
+dependencies {
+    compile project(':versionberg')
+}
+
+task('hello') << {
+    println project.versionberg
+    println project.version
+}
