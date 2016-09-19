@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/rockerhieu/Versionberg.svg?style=svg)](https://circleci.com/gh/rockerhieu/Versionberg)
-![Versionberg on Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.rockerhieu/versionberg/badge.svg)
+![Versionberg on Maven Central](https://img.shields.io/maven-central/v/io.github.rockerhieu/versionberg.svg)
 
 # Versionberg
 
