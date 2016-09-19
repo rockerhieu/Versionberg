@@ -91,7 +91,7 @@ versionberg {
 }
 ```
 
-Available variables can be used in `nameTemplate` and `codeTemplate` can be found [here](https://github.com/rockerhieu/Versionberg/wiki/Usage).
+See [Wiki](https://github.com/rockerhieu/Versionberg/wiki/Usage) for a the list of all available variables can be used in `nameTemplate` and `codeTemplate`.
 
 # Contributing
 
