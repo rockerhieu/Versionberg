@@ -91,7 +91,23 @@ versionberg {
 }
 ```
 
-See [Wiki](https://github.com/rockerhieu/Versionberg/wiki/Usage) for a the list of all available variables can be used in `nameTemplate` and `codeTemplate`.
+See [Advanced Usage](https://github.com/rockerhieu/Versionberg/wiki/Advanced-Usage#template-variables) for a the list of all available variables can be used in `nameTemplate` and `codeTemplate`.
+
+## My config
+This is the config that I been using for some years:
+```groovy
+versionberg {
+    major 1
+    minor 0
+    patch 10
+    nameTemplate '${major}.${minor}.${commitCount}.${commitSha}'
+    codeTemplate '(((${major} * 100) + ${minor}) * 100) * 100000 + ${build}'
+}
+```
+
+Main advantages:
+* `${commitCount}`: easy to reference to a version when communicating
+* `${commitSha}`: easy to identify the git revision of a given build
 
 # Contributing
 
