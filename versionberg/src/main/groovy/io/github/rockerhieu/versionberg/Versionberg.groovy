@@ -29,8 +29,8 @@ class Versionberg {
     def minor = 0
     def patch = 0
     def build = Git.commitCount
-    def nameTemplate = '${major}.${minor}.${patch}.${commitSha}'
-    def codeTemplate = '(((${major} * 100) + ${minor}) * 100) * 100000 + ${build}'
+    def nameTemplate = '${major}.${minor}.${patch}.${build}'
+    def codeTemplate = '${build}'
 
     private def engine = new groovy.text.SimpleTemplateEngine()
 

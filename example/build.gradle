@@ -1,10 +1,9 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
-        classpath 'io.github.rockerhieu:versionberg:1.0.0-SNAPSHOT'
+        classpath 'io.github.rockerhieu:versionberg:1.0.0'
     }
 }
 
@@ -15,8 +14,8 @@ versionberg {
     major 1
     minor 0
     patch 10
-    nameTemplate '${major}.${minor}-SNAPSHOT'
-    codeTemplate '${commitCount}'
+    nameTemplate '${major}.${minor}.${commitSha}-SNAPSHOT'
+    codeTemplate '(((${major} * 100) + ${minor}) * 100) * 100000 + ${build}'
 }
 
 version = versionberg.name
