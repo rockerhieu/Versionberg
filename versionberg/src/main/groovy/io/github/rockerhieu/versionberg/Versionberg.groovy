@@ -25,13 +25,14 @@ package io.github.rockerhieu.versionberg
  * Created by rockerhieu on 9/11/16.
  */
 class Versionberg {
-    private static final def UNDEFINED = -1;
     def major = 0
     def minor = 0
     def patch = 0
-    def build = UNDEFINED
-    def commitSha = Git.commitSha
-    def commitCount = Git.commitCount
+    def build = Git.commitCount
+    def nameTemplate = '${major}.${minor}.${patch}.${commitSha}'
+    def codeTemplate = '(((${major} * 100) + ${minor}) * 100) * 100000 + ${build}'
+
+    private def engine = new groovy.text.SimpleTemplateEngine()
 
     public <T> void setMajor(T number) {
         major = parse(number)
@@ -49,19 +50,23 @@ class Versionberg {
         build = parse(number)
     }
 
-    public int getBuild() {
-        if (build == UNDEFINED) {
-            build = Git.commitCount
-        }
-        return build
-    }
-
     public int getCode() {
-        return (((major * 100) + minor) * 100) * 100000 + getBuild()
+        return Eval.me(engine.createTemplate(codeTemplate).make(getMap()).toString())
     }
 
     public String getName() {
-        return "${major}.${minor}.${patch}.${commitSha}"
+        return engine.createTemplate(nameTemplate).make(getMap()).toString()
+    }
+
+    private Map getMap() {
+        return [
+                "major"      : getMajor(),
+                "minor"      : getMinor(),
+                "patch"      : getPatch(),
+                "build"      : getBuild(),
+                "commitSha"  : Git.commitSha,
+                "commitCount": Git.commitCount,
+        ]
     }
 
     private static <T> int parse(T number) {
@@ -88,8 +93,8 @@ class Versionberg {
                 "\nminor: ${getMinor()}" +
                 "\npatch: ${getPatch()}" +
                 "\nbuild: ${getBuild()}" +
-                "\ncommitSha: ${getCommitSha()}" +
-                "\ncommitCount: ${getCommitCount()}" +
+                "\ncommitSha: ${Git.commitSha}" +
+                "\ncommitCount: ${Git.commitCount}" +
                 "\ncode: ${getCode()}" +
                 "\nname: ${getName()}"
     }
