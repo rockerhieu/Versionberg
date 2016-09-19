@@ -115,7 +115,6 @@ This is the config that I been using for some years:
 versionberg {
     major 1
     minor 0
-    patch 10
     nameTemplate '${major}.${minor}.${commitCount}.${commitSha}'
     codeTemplate '(((${major} * 100) + ${minor}) * 100) * 100000 + ${build}'
 }
@@ -125,7 +124,7 @@ Example value:
 ```
 major: 1
 minor: 0
-patch: 10
+patch: 0
 build: 12
 commitSha: 9a35eb9
 commitCount: 12
