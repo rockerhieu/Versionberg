@@ -15,6 +15,20 @@ plugins {
 }
 ```
 
+Or the legacy way:
+ ```groovy
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'io.github.rockerhieu:versionberg:<latest-version>'
+    }
+}
+
+apply plugin: 'io.github.rockerhieu.versionberg'
+```
+
 ## Java
 ```groovy
 buildscript {
@@ -26,8 +40,8 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
 apply plugin: 'io.github.rockerhieu.versionberg'
+apply plugin: 'java'
 
 versionberg {
     major 1
@@ -49,8 +63,8 @@ buildscript {
     }
 }
 
-apply plugin: 'com.android.application'
 apply plugin: 'io.github.rockerhieu.versionberg'
+apply plugin: 'com.android.application'
 
 versionberg {
     major 1
