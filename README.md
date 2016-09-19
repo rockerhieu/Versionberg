@@ -109,6 +109,9 @@ Main advantages:
 * `${commitCount}`: easy to reference to a version when communicating
 * `${commitSha}`: easy to identify the git revision of a given build
 
+# Acknowledgements
+Poster by [Breaking Bad Generator](http://sbll.org/breakingbad/)
+
 # Contributing
 
 Please fork this repository and contribute back using
