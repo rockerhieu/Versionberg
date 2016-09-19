@@ -119,6 +119,18 @@ versionberg {
 }
 ```
 
+Example value:
+```
+major: 1
+minor: 0
+patch: 10
+build: 12
+commitSha: 9a35eb9
+commitCount: 12
+code: 1000000012
+name: 1.0.12.9a35eb9
+```
+
 Main advantages:
 * `${commitCount}`: easy to reference to a version when communicating
 * `${commitSha}`: easy to identify the git revision of a given build
