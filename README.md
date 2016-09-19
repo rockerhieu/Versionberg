@@ -1,50 +1,99 @@
 [![CircleCI](https://circleci.com/gh/rockerhieu/Versionberg.svg?style=svg)](https://circleci.com/gh/rockerhieu/Versionberg)
 ![Versionberg on Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.rockerhieu/Versionberg/badge.svg)
 
-## Versionberg
+# Versionberg
 
 Gradle plugin for versioning your library/application on every git commit.
 
 ![image](https://github.com/rockerhieu/Versionberg/raw/master/assets/poster.jpg)
 
-## Usage
-
-### Gradle 2.1+
+# Usage
+You can use the new plugin syntax for gradle `2.1+`:
 ```groovy
 plugins {
   id "io.github.rockerhieu.versionberg" version "<latest-version>"
 }
 ```
 
-### Older Gradle versions
+## Java
 ```groovy
 buildscript {
     repositories {
         jcenter()
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
         classpath 'io.github.rockerhieu:versionberg:<latest-version>'
     }
 }
 
+apply plugin: 'java'
 apply plugin: 'io.github.rockerhieu.versionberg'
+
+versionberg {
+    major 1
+    minor 0
+    patch 0
+}
+
+version = versionberg.name
 ```
 
-### Config
-A version contains 4 parts: major, minor, patch and build.
+## Android
 ```groovy
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'io.github.rockerhieu:versionberg:<latest-version>'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'io.github.rockerhieu.versionberg'
+
 versionberg {
-    major 1   									// default is 0
-    minor 0 									// default is 0
-    patch 10									// default is 0
-    build 2 									// default is ${commitCount}
-    nameTemplate '${major}.${minor}-SNAPSHOT'	// default is '${major}.${minor}.${patch}.${commitSha}'
-    codeTemplate '${commitCount}'				// default is '(((${major} * 100) + ${minor}) * 100) * 100000 + ${build}'
+    major 1
+    minor 0
+    patch 0
+}
+
+android {
+    defaultConfig {
+        versionCode versionberg.code
+        versionName versionberg.name
+    }
 }
 ```
 
-## Contributing
+## Advanced usage
+You can define template for version name and version code if you don't want to use the default settings provided by `Versionberg`
+
+```groovy
+versionberg {
+    // Increase when you make incompatible API changes (default value is 0)
+    major 1
+
+    // Increase when you add functionality in a backwards-compatible manner (default value is 0)
+    minor 0
+
+    // Increase when you make backwards-compatible bug fixes (default value is 0)
+    patch 0
+
+    // default is ${commitCount}, uncomment to use a custom build number
+    // build 2
+
+    // Default version name template is '${major}.${minor}.${patch}.${build}'
+    nameTemplate '${major}.${minor}-SNAPSHOT'
+    
+    // Default version code template is '${build}'
+    codeTemplate '(((${major} * 100) + ${minor}) * 100) * 100000 + ${build}'
+}
+```
+
+Available variables can be used in `nameTemplate` and `codeTemplate` can be found [here](https://github.com/rockerhieu/Versionberg/wiki/Usage).
+
+# Contributing
 
 Please fork this repository and contribute back using
 [pull requests](https://github.com/rockerhieu/Versionberg/pulls).
@@ -53,7 +102,7 @@ Any contributions, large or small, major features, bug fixes, additional
 language translations, unit/integration tests are welcomed and appreciated
 but will be thoroughly reviewed and discussed.
 
-## License
+# License
 
 * [The MIT License](https://opensource.org/licenses/MIT)
 
