@@ -25,6 +25,7 @@ package io.github.rockerhieu.versionberg
  * Created by rockerhieu on 9/11/16.
  */
 class Versionberg {
+    def gitDir = ''
     def major = 0
     def minor = 0
     def patch = 0
@@ -51,10 +52,12 @@ class Versionberg {
     }
 
     public int getCode() {
+        Git.projectPath = gitDir
         return Eval.me(engine.createTemplate(codeTemplate).make(getMap()).toString())
     }
 
     public String getName() {
+        Git.projectPath = gitDir
         return engine.createTemplate(nameTemplate).make(getMap()).toString()
     }
 

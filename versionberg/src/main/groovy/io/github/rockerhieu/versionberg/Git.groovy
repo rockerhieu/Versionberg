@@ -30,7 +30,7 @@ class Git {
 
     static String getCommitSha() {
         try {
-            def externalPathOption = checkInnerGitRepo() ? "--git-dir=${projectPath}/../.git" : ''
+            def externalPathOption = checkInnerGitRepo() ? "--git-dir=${projectPath}/.git" : ''
             return "git ${externalPathOption} rev-parse --short HEAD".execute().text.trim()
         } catch (Exception e) {
             Logger.i(e)
@@ -41,7 +41,7 @@ class Git {
         try {
             def output = new StringBuilder()
             def error = new StringBuilder()
-            def externalPathOption = checkInnerGitRepo() ? "--git-dir=${projectPath}/../.git": ''
+            def externalPathOption = checkInnerGitRepo() ? "--git-dir=${projectPath}/.git": ''
             def process = "git ${externalPathOption} rev-list HEAD --count".execute()
             process.waitForProcessOutput(output, error)
             if (output.isInteger()) {
