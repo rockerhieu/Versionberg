@@ -52,16 +52,15 @@ class Versionberg {
     }
 
     public int getCode() {
-        Git.repositoryPath = gitDir
         return Eval.me(engine.createTemplate(codeTemplate).make(getMap()).toString())
     }
 
     public String getName() {
-        Git.repositoryPath = gitDir
         return engine.createTemplate(nameTemplate).make(getMap()).toString()
     }
 
     private Map getMap() {
+        Git.repositoryPath = gitDir
         return [
                 "major"      : getMajor(),
                 "minor"      : getMinor(),
