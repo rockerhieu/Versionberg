@@ -26,11 +26,11 @@ package io.github.rockerhieu.versionberg
  * Created by rockerhieu on 9/12/16.
  */
 class Git {
-    static String projectPath = ''
+    static String repositoryPath = ''
 
     static String getCommitSha() {
         try {
-            def externalPathOption = checkInnerGitRepo() ? "--git-dir=${projectPath}/.git" : ''
+            def externalPathOption = checkInnerGitRepo() ? "--git-dir=${repositoryPath}/.git" : ''
             return "git ${externalPathOption} rev-parse --short HEAD".execute().text.trim()
         } catch (Exception e) {
             Logger.i(e)
@@ -41,7 +41,7 @@ class Git {
         try {
             def output = new StringBuilder()
             def error = new StringBuilder()
-            def externalPathOption = checkInnerGitRepo() ? "--git-dir=${projectPath}/.git": ''
+            def externalPathOption = checkInnerGitRepo() ? "--git-dir=${repositoryPath}/.git": ''
             def process = "git ${externalPathOption} rev-list HEAD --count".execute()
             process.waitForProcessOutput(output, error)
             if (output.isInteger()) {
@@ -55,12 +55,12 @@ class Git {
         return 0
     }
     private static boolean checkInnerGitRepo() {
-        if(projectPath.empty) {
+        if(repositoryPath.empty) {
             return false
         }
         // check if there is a git repo at the root of the current project
         try {
-            "git --git-dir=${projectPath}/../.git rev-parse --git-dir".execute()
+            "git --git-dir=${repositoryPath}/.git rev-parse --git-dir".execute()
         } catch (Exception e) {
             return false
         }
