@@ -26,19 +26,19 @@ package io.github.rockerhieu.versionberg
  * Created by rockerhieu on 9/12/16.
  */
 class Git {
-    static String getCommitSha() {
+    static String getCommitSha(String repositoryPath) {
         try {
-            return 'git rev-parse --short HEAD'.execute().text.trim()
+            return "git --git-dir=${repositoryPath}/.git rev-parse --short HEAD".execute().text.trim()
         } catch (Exception e) {
             Logger.i(e)
             return "null"
         }
     }
-    static int getCommitCount() {
+    static int getCommitCount(String repositoryPath) {
         try {
             def output = new StringBuilder()
             def error = new StringBuilder()
-            def process = 'git rev-list HEAD --count'.execute()
+            def process = "git --git-dir=${repositoryPath}/.git rev-list HEAD --count".execute()
             process.waitForProcessOutput(output, error)
             if (output.isInteger()) {
                 return output.toInteger()
