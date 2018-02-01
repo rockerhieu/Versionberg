@@ -25,15 +25,19 @@ package io.github.rockerhieu.versionberg
  * Created by rockerhieu on 9/11/16.
  */
 class Versionberg {
-    def gitDir = ''
+    def gitDir
     def major = 0
     def minor = 0
     def patch = 0
-    def build = Git.commitCount
+    def build = Git.getCommitCount(gitDir)
     def nameTemplate = '${major}.${minor}.${patch}.${build}'
     def codeTemplate = '${build}'
 
     private def engine = new groovy.text.SimpleTemplateEngine()
+
+    Versionberg(String gitDir) {
+        this.gitDir = gitDir
+    }
 
     public <T> void setMajor(T number) {
         major = parse(number)
@@ -60,14 +64,13 @@ class Versionberg {
     }
 
     private Map getMap() {
-        Git.repositoryPath = gitDir
         return [
                 "major"      : getMajor(),
                 "minor"      : getMinor(),
                 "patch"      : getPatch(),
                 "build"      : getBuild(),
-                "commitSha"  : Git.commitSha,
-                "commitCount": Git.commitCount,
+                "commitSha"  : Git.getCommitSha(gitDir),
+                "commitCount": Git.getCommitCount(gitDir),
         ]
     }
 
@@ -95,8 +98,8 @@ class Versionberg {
                 "\nminor: ${getMinor()}" +
                 "\npatch: ${getPatch()}" +
                 "\nbuild: ${getBuild()}" +
-                "\ncommitSha: ${Git.commitSha}" +
-                "\ncommitCount: ${Git.commitCount}" +
+                "\ncommitSha: ${Git.getCommitSha(gitDir)}" +
+                "\ncommitCount: ${Git.getCommitCount(gitDir)}" +
                 "\ncode: ${getCode()}" +
                 "\nname: ${getName()}"
     }

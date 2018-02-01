@@ -32,7 +32,7 @@ class VersionbergPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.extensions.create('versionberg', Versionberg)
+        project.extensions.create('versionberg', Versionberg, project.rootDir.absolutePath)
         Logger.i("${project.versionberg}")
     }
 }
