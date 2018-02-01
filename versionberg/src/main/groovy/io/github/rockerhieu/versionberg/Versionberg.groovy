@@ -25,18 +25,19 @@ package io.github.rockerhieu.versionberg
  * Created by rockerhieu on 9/11/16.
  */
 class Versionberg {
-    def gitDir
-    def major = 0
-    def minor = 0
-    def patch = 0
-    def build = Git.getCommitCount(gitDir)
+    File gitDir
+    def major
+    def minor
+    def patch
+    def build
     def nameTemplate = '${major}.${minor}.${patch}.${build}'
     def codeTemplate = '${build}'
 
     private def engine = new groovy.text.SimpleTemplateEngine()
 
-    Versionberg(String gitDir) {
+    public void init(File gitDir) {
         this.gitDir = gitDir
+        build = Git.getCommitCount(gitDir)
     }
 
     public <T> void setMajor(T number) {
@@ -94,13 +95,14 @@ class Versionberg {
 
     @Override
     String toString() {
-        return "major: ${getMajor()}" +
-                "\nminor: ${getMinor()}" +
-                "\npatch: ${getPatch()}" +
-                "\nbuild: ${getBuild()}" +
-                "\ncommitSha: ${Git.getCommitSha(gitDir)}" +
-                "\ncommitCount: ${Git.getCommitCount(gitDir)}" +
-                "\ncode: ${getCode()}" +
-                "\nname: ${getName()}"
+        return "\n\tmajor: ${getMajor()}" +
+                "\n\tminor: ${getMinor()}" +
+                "\n\tpatch: ${getPatch()}" +
+                "\n\tbuild: ${getBuild()}" +
+                "\n\tcommitSha: ${Git.getCommitSha(gitDir)}" +
+                "\n\tcommitCount: ${Git.getCommitCount(gitDir)}" +
+                "\n\tcode: ${getCode()}" +
+                "\n\tname: ${getName()}" +
+                "\n\tgitDir: ${getGitDir()}"
     }
 }

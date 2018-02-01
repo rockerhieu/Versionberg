@@ -21,7 +21,7 @@ Or the legacy way:
  ```groovy
 buildscript {
     repositories {
-        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath 'io.github.rockerhieu:versionberg:<latest-version>'
@@ -31,11 +31,29 @@ buildscript {
 apply plugin: 'io.github.rockerhieu.versionberg'
 ```
 
+## Gradle tasks
+
+`versionbergInfo`: print version info into the console, e.g:
+
+```
+$ ./gradlew versionbergInfo
+$ Versionberg: 
+          major: 1
+          minor: 0
+          patch: 10
+          build: 25
+          commitSha: d48434f
+          commitCount: 25
+          code: 1000000025
+          name: 1.0.d48434f-SNAPSHOT
+          gitDir: null
+```
+
 ## Java
 ```groovy
 buildscript {
     repositories {
-        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath 'io.github.rockerhieu:versionberg:<latest-version>'
@@ -83,6 +101,20 @@ android {
 ```
 
 ## Advanced usage
+
+### Custom git repo
+By default the plugin will try to find the git repo in the root project directory. But you can change it to any git repo that you want by setting `gitDir`:
+```
+versionberg {
+    major 1
+    minor 0
+    gitDir "path/to/git/repo/.git"
+}
+```
+
+
+### Template
+
 You can define template for version name and version code if you don't want to use the default settings provided by `Versionberg`
 
 ```groovy

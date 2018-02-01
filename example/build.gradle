@@ -1,5 +1,5 @@
 plugins {
-    id "io.github.rockerhieu.versionberg" version "1.0.0"
+    id "io.github.rockerhieu.versionberg" version "1.0.1"
 }
 
 apply plugin: 'java'
@@ -16,9 +16,4 @@ version = versionberg.name
 
 dependencies {
     compile project(':versionberg')
-}
-
-task('hello') << {
-    println project.versionberg
-    println project.version
 }

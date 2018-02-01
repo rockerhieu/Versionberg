@@ -32,9 +32,18 @@ class VersionbergPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.extensions.create('versionberg', Versionberg, project.rootDir.absolutePath)
+        def versionberg = project.extensions.create('versionberg', Versionberg)
         project.afterEvaluate {
-            Logger.i("${project.versionberg}")
+            Logger.i("gitDir = ${versionberg.gitDir}")
+
+            versionberg.init(versionberg.gitDir)
+
+            project.task('versionbergInfo') {
+                description 'Print version info'
+                doLast {
+                    Logger.i("${versionberg}")
+                }
+            }
         }
     }
 }
