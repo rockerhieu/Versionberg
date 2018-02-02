@@ -72,6 +72,7 @@ class Versionberg {
                 "build"      : getBuild(),
                 "commitSha"  : Git.getCommitSha(gitDir),
                 "commitCount": Git.getCommitCount(gitDir),
+                "today"      : new Date().format("yyyyMMdd"),
         ]
     }
 

@@ -132,12 +132,14 @@ versionberg {
     // build 2
 
     // Default version name template is '${major}.${minor}.${patch}.${build}'
-    nameTemplate '${major}.${minor}-SNAPSHOT'
+    nameTemplate '${major}.${minor}.${new Date().format("ddMMyyyy")}-SNAPSHOT'
     
     // Default version code template is '${build}'
     codeTemplate '(((${major} * 100) + ${minor}) * 100) * 100000 + ${build}'
 }
 ```
+
+You can put date into the template, i.e `${new Date().format("ddMMyyyy")}`, see more at [SimpleDateFormat](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html).
 
 See [Advanced Usage](https://github.com/rockerhieu/Versionberg/wiki/Advanced-Usage#template-variables) for the list of all available variables can be used in `nameTemplate` and `codeTemplate`.
 
