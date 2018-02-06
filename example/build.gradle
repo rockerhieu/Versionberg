@@ -1,5 +1,5 @@
 plugins {
-    id "io.github.rockerhieu.versionberg" version "1.0.1"
+    id "io.github.rockerhieu.versionberg" version "1.0.2"
 }
 
 apply plugin: 'java'
@@ -8,11 +8,12 @@ versionberg {
     major 1
     minor 0
     patch 10
-    nameTemplate '${major}.${minor}.${commitSha}.${new Date().format("ddMMyyyy")}-SNAPSHOT'
+    nameTemplate '${major}.${minor}.${patch}.${commitCount}.${commitSha}.${build}.${today}.${new Date().format("ddMMyyyy")}'
     codeTemplate '(((${major} * 100) + ${minor}) * 100) * 100000 + ${build}'
+    gitDir new File(rootProject.rootDir.absolutePath, ".git")
 }
 
-version = versionberg.name
+version = versionberg.name + versionberg.code
 
 dependencies {
     compile project(':versionberg')

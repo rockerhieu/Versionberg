@@ -32,7 +32,7 @@ class VersionbergPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        def versionberg = project.extensions.create('versionberg', Versionberg)
+        def versionberg = project.extensions.create('versionberg', Versionberg, new File(project.rootProject.rootDir, ".git"))
         project.afterEvaluate {
             Logger.i("gitDir = ${versionberg.gitDir}")
 

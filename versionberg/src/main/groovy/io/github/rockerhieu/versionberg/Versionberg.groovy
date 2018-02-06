@@ -35,7 +35,11 @@ class Versionberg {
 
     private def engine = new groovy.text.SimpleTemplateEngine()
 
-    public void init(File gitDir) {
+    Versionberg(File gitDir) {
+        init(gitDir)
+    }
+
+    void init(File gitDir) {
         this.gitDir = gitDir
         build = Git.getCommitCount(gitDir)
     }
