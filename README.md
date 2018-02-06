@@ -21,7 +21,7 @@ Or the legacy way:
  ```groovy
 buildscript {
     repositories {
-        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://plugins.gradle.org/m2/" } // or jcenter()
     }
     dependencies {
         classpath 'io.github.rockerhieu:versionberg:<latest-version>'
@@ -53,7 +53,7 @@ $ Versionberg:
 ```groovy
 buildscript {
     repositories {
-        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://plugins.gradle.org/m2/" } // or jcenter()
     }
     dependencies {
         classpath 'io.github.rockerhieu:versionberg:<latest-version>'
@@ -76,7 +76,7 @@ version = versionberg.name
 ```groovy
 buildscript {
     repositories {
-        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" } // or jcenter()
     }
     dependencies {
         classpath 'io.github.rockerhieu:versionberg:<latest-version>'
