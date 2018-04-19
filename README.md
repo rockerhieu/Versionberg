@@ -108,7 +108,7 @@ By default the plugin will try to find the git repo in the root project director
 versionberg {
     major 1
     minor 0
-    gitDir "path/to/git/repo/.git"
+    gitDir new File("path/to/git/repo/.git")
 }
 ```
 
