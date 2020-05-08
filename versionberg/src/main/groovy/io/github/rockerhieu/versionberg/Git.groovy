@@ -54,4 +54,18 @@ class Git {
         }
         return 0
     }
+
+    static String getCurrentBranch(File gitDir) {
+        try {
+            def output = new StringBuilder()
+            def error = new StringBuilder()
+            def pb = gitDir == null ? new ProcessBuilder("git", "rev-parse", "--abbrev-ref", "HEAD")
+                    : new ProcessBuilder("git", "--git-dir=${gitDir.absolutePath}", "rev-parse", "--abbrev-ref", "HEAD")
+            pb.start().waitForProcessOutput(output, error)
+            return output.toString().trim()
+        } catch (Exception e) {
+            Logger.i(e)
+        }
+        return 0
+    }
 }

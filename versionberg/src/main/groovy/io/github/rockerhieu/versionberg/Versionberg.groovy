@@ -76,6 +76,7 @@ class Versionberg {
                 "build"      : getBuild(),
                 "commitSha"  : Git.getCommitSha(gitDir),
                 "commitCount": Git.getCommitCount(gitDir),
+                "currentBranch" : Git.getCurrentBranch(gitDir),
                 "today"      : new Date().format("yyyyMMdd"),
         ]
     }
@@ -108,6 +109,7 @@ class Versionberg {
                 "\n\tcommitCount: ${Git.getCommitCount(gitDir)}" +
                 "\n\tcode: ${getCode()}" +
                 "\n\tname: ${getName()}" +
+                "\n\tcurrentBranch: ${Git.getCurrentBranch(gitDir)}" +
                 "\n\tgitDir: ${getGitDir()}"
     }
 }
